@@ -1,0 +1,21 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP BMP388
+D Absolute Barometric Pressure Sensor, LGA-10
+K I2C, SPI, pressure, temperature, sensor
+F https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp388-ds001.pdf
+$ENDCMP
+#
+$CMP BMP390L
+D Absolute Barometric Pressure Sensor, LGA-10
+K I2C, SPI, pressure, temperature, sensor
+F https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp390l-ds001.pdf
+$ENDCMP
+#
+$CMP Conn_03x08_Row_Letter_Last
+D Generic connector, double row, 02x08, row letter last pin numbering scheme (pin number consists of a letter for the row and a number for the pin index in this row. 1a, ..., Na; 1b, ..., Nb)), script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+#End Doc Library
