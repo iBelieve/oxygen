@@ -14,20 +14,6 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Connector_Generic:Conn_01x04 J?
-U 1 1 61026937
-P 4150 1200
-AR Path="/61026937" Ref="J?"  Part="1" 
-AR Path="/60FE74E7/61026937" Ref="J3"  Part="1" 
-F 0 "J3" H 4068 775 50  0000 C CNN
-F 1 "JST SH-4" H 4068 866 50  0000 C CNN
-F 2 "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal" H 4150 1200 50  0001 C CNN
-F 3 "~" H 4150 1200 50  0001 C CNN
-F 4 "SM04B-SRSS-TB(LF)(SN)" H 4150 1200 50  0001 C CNN "Part#"
-	1    4150 1200
-	-1   0    0    1   
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 6102693D
 P 4550 1350
@@ -80,20 +66,6 @@ Wire Notes Line
 Text Notes 4000 650  0    50   ~ 10
 Qwiic I2C
 $Comp
-L Connector_Generic:Conn_01x04 J?
-U 1 1 61026957
-P 5450 1200
-AR Path="/61026957" Ref="J?"  Part="1" 
-AR Path="/60FE74E7/61026957" Ref="J4"  Part="1" 
-F 0 "J4" H 5368 775 50  0000 C CNN
-F 1 "JST ZH-4" H 5368 866 50  0000 C CNN
-F 2 "Sonrise:JST_ZH_B4B-ZR_1x04_P1.50mm_Vertical" H 5450 1200 50  0001 C CNN
-F 3 "~" H 5450 1200 50  0001 C CNN
-F 4 "B4B-ZR-SM4-TF(LF)(SN)" H 5450 1200 50  0001 C CNN "Part#"
-	1    5450 1200
-	-1   0    0    1   
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 6102695D
 P 5750 1350
@@ -141,20 +113,6 @@ Wire Wire Line
 	5650 1300 5900 1300
 Text GLabel 5900 1300 2    50   BiDi ~ 0
 USART2_TX
-$Comp
-L Connector_Generic:Conn_01x04 J?
-U 1 1 61026975
-P 4200 2350
-AR Path="/61026975" Ref="J?"  Part="1" 
-AR Path="/60FE74E7/61026975" Ref="J7"  Part="1" 
-F 0 "J7" H 4118 1925 50  0000 C CNN
-F 1 "Conn_01x04" H 4118 2016 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 4200 2350 50  0001 C CNN
-F 3 "~" H 4200 2350 50  0001 C CNN
-F 4 "PR20204VBNN" H 4200 2350 50  0001 C CNN "Part#"
-	1    4200 2350
-	-1   0    0    1   
-$EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 6102697B
@@ -302,20 +260,6 @@ Wire Wire Line
 Wire Wire Line
 	1650 3150 1650 3200
 Connection ~ 1700 3150
-$Comp
-L Sonrise:BMP388 U?
-U 1 1 610269E0
-P 1650 3600
-AR Path="/610269E0" Ref="U?"  Part="1" 
-AR Path="/60FE74E7/610269E0" Ref="U4"  Part="1" 
-F 0 "U4" H 1930 3646 50  0000 L CNN
-F 1 "BMP388" H 1930 3555 50  0000 L CNN
-F 2 "Sonrise:LGA-10_2x2mm_P0.5mm" H 1650 2900 50  0001 C CNN
-F 3 "https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp388-ds001.pdf" H 1650 3600 50  0001 C CNN
-F 4 "BMP388" H 1650 3600 50  0001 C CNN "Part#"
-	1    1650 3600
-	1    0    0    -1  
-$EndComp
 Text GLabel 1150 3800 0    50   Input ~ 0
 BMP_INT
 Wire Wire Line
@@ -344,20 +288,6 @@ Wire Wire Line
 Wire Wire Line
 	1800 4050 1800 4000
 $Comp
-L Device:C C?
-U 1 1 610269F5
-P 2450 3600
-AR Path="/610269F5" Ref="C?"  Part="1" 
-AR Path="/60FE74E7/610269F5" Ref="C22"  Part="1" 
-F 0 "C22" H 2565 3646 50  0000 L CNN
-F 1 "0.1u" H 2565 3555 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 2488 3450 50  0001 C CNN
-F 3 "~" H 2450 3600 50  0001 C CNN
-F 4 "CL21B104KBCNNNC‎" H 2450 3600 50  0001 C CNN "Part#"
-	1    2450 3600
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR?
 U 1 1 610269FB
 P 2450 3450
@@ -381,34 +311,6 @@ F 1 "GND" H 2455 3577 50  0000 C CNN
 F 2 "" H 2450 3750 50  0001 C CNN
 F 3 "" H 2450 3750 50  0001 C CNN
 	1    2450 3750
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 61026A08
-P 3050 2150
-AR Path="/61026A08" Ref="C?"  Part="1" 
-AR Path="/60FE74E7/61026A08" Ref="C21"  Part="1" 
-F 0 "C21" H 3165 2196 50  0000 L CNN
-F 1 "2.2n" H 3165 2105 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 3088 2000 50  0001 C CNN
-F 3 "~" H 3050 2150 50  0001 C CNN
-F 4 "CL21B222KBANNNC" H 3050 2150 50  0001 C CNN "Part#"
-	1    3050 2150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 61026A0F
-P 2650 2150
-AR Path="/61026A0F" Ref="C?"  Part="1" 
-AR Path="/60FE74E7/61026A0F" Ref="C20"  Part="1" 
-F 0 "C20" H 2765 2196 50  0000 L CNN
-F 1 "0.1u" H 2765 2105 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 2688 2000 50  0001 C CNN
-F 3 "~" H 2650 2150 50  0001 C CNN
-F 4 "CL21B104KBCNNNC‎" H 2650 2150 50  0001 C CNN "Part#"
-	1    2650 2150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -446,20 +348,6 @@ F 3 "" H 3050 2300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C C?
-U 1 1 61026A26
-P 3500 1650
-AR Path="/61026A26" Ref="C?"  Part="1" 
-AR Path="/60FE74E7/61026A26" Ref="C19"  Part="1" 
-F 0 "C19" H 3615 1696 50  0000 L CNN
-F 1 "0.1u" H 3615 1605 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric" H 3538 1500 50  0001 C CNN
-F 3 "~" H 3500 1650 50  0001 C CNN
-F 4 "CL21B104KBCNNNC‎" H 3500 1650 50  0001 C CNN "Part#"
-	1    3500 1650
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR?
 U 1 1 61026A2C
 P 3500 1500
@@ -483,20 +371,6 @@ F 1 "GND" H 3505 1627 50  0000 C CNN
 F 2 "" H 3500 1800 50  0001 C CNN
 F 3 "" H 3500 1800 50  0001 C CNN
 	1    3500 1800
-	1    0    0    -1  
-$EndComp
-$Comp
-L Sensor_Motion:MPU-6000 U?
-U 1 1 61026A39
-P 1900 1650
-AR Path="/61026A39" Ref="U?"  Part="1" 
-AR Path="/60FE74E7/61026A39" Ref="U3"  Part="1" 
-F 0 "U3" H 1400 2200 50  0000 L BNN
-F 1 "MPU-6000" V 1900 1650 50  0000 C CNN
-F 2 "Sensor_Motion:InvenSense_QFN-24_4x4mm_P0.5mm" H 1900 850 50  0001 C CNN
-F 3 "https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf" H 1900 1500 50  0001 C CNN
-F 4 "MPU-6000" H 1900 1650 50  0001 C CNN "Part#"
-	1    1900 1650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -616,18 +490,6 @@ F 3 "" H 7350 2550 50  0001 C CNN
 	1    7350 2550
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector_Generic:Conn_01x16 J6
-U 1 1 61089BC3
-P 7600 1700
-F 0 "J6" H 7680 1692 50  0000 L CNN
-F 1 "Conn_01x16" H 7680 1601 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x16_P2.54mm_Vertical" H 7600 1700 50  0001 C CNN
-F 3 "~" H 7600 1700 50  0001 C CNN
-F 4 "61301611121" H 7600 1700 50  0001 C CNN "Part#"
-	1    7600 1700
-	1    0    0    -1  
-$EndComp
 Text GLabel 7250 2000 0    50   Input ~ 0
 CAN1_TX
 Text GLabel 7250 2100 0    50   Output ~ 0
@@ -654,113 +516,97 @@ Wire Wire Line
 Wire Wire Line
 	7400 2200 7250 2200
 $Comp
-L Connector:Micro_SD_Card_Det J?
-U 1 1 60DD3D2A
-P 2350 5500
-AR Path="/60DD3D2A" Ref="J?"  Part="1" 
-AR Path="/60FE74E7/60DD3D2A" Ref="J10"  Part="1" 
-F 0 "J10" H 2300 6317 50  0000 C CNN
-F 1 "Micro_SD_Card_Det" H 2300 6226 50  0000 C CNN
-F 2 "Connector_Card:microSD_HC_Hirose_DM3BT-DSF-PEJS" H 4400 6200 50  0001 C CNN
-F 3 "https://www.hirose.com/product/download/?distributor=digikey&type=2d&lang=en&num=DM3BT-DSF-PEJS" H 2350 5600 50  0001 C CNN
-F 4 "DM3BT-DSF-PEJS" H 2350 5500 50  0001 C CNN "Part#"
-	1    2350 5500
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+3.3V #PWR?
 U 1 1 60DD3D30
-P 1400 4900
+P 3550 4900
 AR Path="/60DD3D30" Ref="#PWR?"  Part="1" 
 AR Path="/60FE74E7/60DD3D30" Ref="#PWR056"  Part="1" 
-F 0 "#PWR056" H 1400 4750 50  0001 C CNN
-F 1 "+3.3V" H 1415 5073 50  0000 C CNN
-F 2 "" H 1400 4900 50  0001 C CNN
-F 3 "" H 1400 4900 50  0001 C CNN
-	1    1400 4900
+F 0 "#PWR056" H 3550 4750 50  0001 C CNN
+F 1 "+3.3V" H 3565 5073 50  0000 C CNN
+F 2 "" H 3550 4900 50  0001 C CNN
+F 3 "" H 3550 4900 50  0001 C CNN
+	1    3550 4900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1400 4900 1400 5400
-Wire Wire Line
-	1400 5400 1450 5400
+	3550 5700 3600 5700
 $Comp
 L power:GND #PWR?
 U 1 1 60DD3D38
-P 1400 6100
+P 3550 6400
 AR Path="/60DD3D38" Ref="#PWR?"  Part="1" 
 AR Path="/60FE74E7/60DD3D38" Ref="#PWR057"  Part="1" 
-F 0 "#PWR057" H 1400 5850 50  0001 C CNN
-F 1 "GND" H 1405 5927 50  0000 C CNN
-F 2 "" H 1400 6100 50  0001 C CNN
-F 3 "" H 1400 6100 50  0001 C CNN
-	1    1400 6100
+F 0 "#PWR057" H 3550 6150 50  0001 C CNN
+F 1 "GND" H 3555 6227 50  0000 C CNN
+F 2 "" H 3550 6400 50  0001 C CNN
+F 3 "" H 3550 6400 50  0001 C CNN
+	1    3550 6400
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1400 6100 1400 6000
+	3550 6400 3550 6300
 Wire Wire Line
-	1400 5600 1450 5600
+	3550 5900 3600 5900
 Wire Wire Line
-	1450 6000 1400 6000
-Connection ~ 1400 6000
+	3600 6300 3550 6300
+Connection ~ 3550 6300
 Wire Wire Line
-	1400 6000 1400 5600
-Text GLabel 1300 5700 0    50   BiDi ~ 0
+	3550 6300 3550 5900
+Text GLabel 1300 6000 0    50   BiDi ~ 0
 SDMMC1_D0
 Wire Wire Line
-	1300 5700 1450 5700
-Text GLabel 1300 5800 0    50   BiDi ~ 0
+	1300 6000 2000 6000
+Text GLabel 1300 6100 0    50   BiDi ~ 0
 SDMMC1_D1
 Wire Wire Line
-	1300 5800 1450 5800
-Text GLabel 1300 5500 0    50   BiDi ~ 0
+	1300 6100 1700 6100
+Text GLabel 1300 5800 0    50   BiDi ~ 0
 SDMMC1_CK
 Wire Wire Line
-	1300 5500 1450 5500
-Text GLabel 1300 5100 0    50   BiDi ~ 0
+	1300 5800 2300 5800
+Text GLabel 1300 5400 0    50   BiDi ~ 0
 SDMMC1_D2
 Wire Wire Line
-	1300 5100 1450 5100
-Text GLabel 1300 5200 0    50   BiDi ~ 0
+	1300 5400 3200 5400
+Text GLabel 1300 5500 0    50   BiDi ~ 0
 SDMMC1_D3
 Wire Wire Line
-	1300 5200 1450 5200
-Text GLabel 1300 5300 0    50   BiDi ~ 0
+	1300 5500 2900 5500
+Text GLabel 1300 5600 0    50   BiDi ~ 0
 SDMMC1_CMD
 Wire Wire Line
-	1300 5300 1450 5300
-Text GLabel 1300 5900 0    50   Output ~ 0
+	1300 5600 2600 5600
+Text GLabel 1300 6200 0    50   Output ~ 0
 SDMMC1_DETECT
 Wire Wire Line
-	1300 5900 1450 5900
+	1300 6200 1400 6200
 $Comp
 L power:GND #PWR?
 U 1 1 60DD3D51
-P 3200 6100
+P 5350 6400
 AR Path="/60DD3D51" Ref="#PWR?"  Part="1" 
 AR Path="/60FE74E7/60DD3D51" Ref="#PWR058"  Part="1" 
-F 0 "#PWR058" H 3200 5850 50  0001 C CNN
-F 1 "GND" H 3205 5927 50  0000 C CNN
-F 2 "" H 3200 6100 50  0001 C CNN
-F 3 "" H 3200 6100 50  0001 C CNN
-	1    3200 6100
+F 0 "#PWR058" H 5350 6150 50  0001 C CNN
+F 1 "GND" H 5355 6227 50  0000 C CNN
+F 2 "" H 5350 6400 50  0001 C CNN
+F 3 "" H 5350 6400 50  0001 C CNN
+	1    5350 6400
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3200 6100 3200 6000
+	5350 6400 5350 6300
 Wire Wire Line
-	3200 6000 3150 6000
+	5350 6300 5300 6300
 Wire Notes Line
-	600  4600 600  6350
+	600  4600 600  6650
 Text Notes 600  4550 0    50   ~ 10
 microSD Card Slot
 Wire Notes Line
-	600  6350 3350 6350
+	600  6650 5500 6650
 Wire Notes Line
-	3350 4600 600  4600
+	5500 4600 600  4600
 Wire Notes Line
-	3350 6350 3350 4600
+	5500 6650 5500 4600
 Wire Wire Line
 	4600 2350 4400 2350
 Wire Wire Line
@@ -824,20 +670,6 @@ F 2 "" H 4400 3850 50  0001 C CNN
 F 3 "" H 4400 3850 50  0001 C CNN
 	1    4400 3850
 	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x06 J?
-U 1 1 61026A51
-P 4150 3600
-AR Path="/61026A51" Ref="J?"  Part="1" 
-AR Path="/60FE74E7/61026A51" Ref="J9"  Part="1" 
-F 0 "J9" H 4068 3075 50  0000 C CNN
-F 1 "1.25mm" H 4068 3166 50  0000 C CNN
-F 2 "Sonrise:10114830-10106LF_P1.25mm_Horizontal" H 4150 3600 50  0001 C CNN
-F 3 "~" H 4150 3600 50  0001 C CNN
-F 4 "10114830-10106LF" H 4150 3600 50  0001 C CNN "Part#"
-	1    4150 3600
-	-1   0    0    1   
 $EndComp
 Text GLabel 9150 1000 0    50   Input ~ 0
 TIM3_CH3_SERVO1
@@ -974,6 +806,176 @@ Wire Notes Line
 	8350 700  8350 2850
 Text Notes 8350 650  0    50   ~ 10
 Servo/ESC Outputs
+Text Label 2650 1850 0    50   ~ 0
+CPOUT
+Text Label 2650 1950 0    50   ~ 0
+REGOUT
+$Comp
+L Connector_Generic:Conn_01x04 J?
+U 1 1 61026937
+P 4150 1200
+AR Path="/61026937" Ref="J?"  Part="1" 
+AR Path="/60FE74E7/61026937" Ref="J3"  Part="1" 
+F 0 "J3" H 4068 775 50  0000 C CNN
+F 1 "JST SH-4" H 4068 866 50  0000 C CNN
+F 2 "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal" H 4150 1200 50  0001 C CNN
+F 3 "~" H 4150 1200 50  0001 C CNN
+F 4 "SM04B-SRSS-TB(LF)(SN)" H 4150 1200 50  0001 C CNN "Part#"
+	1    4150 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J?
+U 1 1 61026957
+P 5450 1200
+AR Path="/61026957" Ref="J?"  Part="1" 
+AR Path="/60FE74E7/61026957" Ref="J4"  Part="1" 
+F 0 "J4" H 5368 775 50  0000 C CNN
+F 1 "JST ZH-4" H 5368 866 50  0000 C CNN
+F 2 "Sonrise:JST_ZH_B4B-ZR_1x04_P1.50mm_Vertical" H 5450 1200 50  0001 C CNN
+F 3 "~" H 5450 1200 50  0001 C CNN
+F 4 "B4B-ZR-SM4-TF(LF)(SN)" H 5450 1200 50  0001 C CNN "Part#"
+	1    5450 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J?
+U 1 1 61026975
+P 4200 2350
+AR Path="/61026975" Ref="J?"  Part="1" 
+AR Path="/60FE74E7/61026975" Ref="J7"  Part="1" 
+F 0 "J7" H 4118 1925 50  0000 C CNN
+F 1 "Conn_01x04" H 4118 2016 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 4200 2350 50  0001 C CNN
+F 3 "~" H 4200 2350 50  0001 C CNN
+F 4 "PR20204VBNN" H 4200 2350 50  0001 C CNN "Part#"
+	1    4200 2350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Sonrise:BMP388 U?
+U 1 1 610269E0
+P 1650 3600
+AR Path="/610269E0" Ref="U?"  Part="1" 
+AR Path="/60FE74E7/610269E0" Ref="U4"  Part="1" 
+F 0 "U4" H 1930 3646 50  0000 L CNN
+F 1 "BMP388" H 1930 3555 50  0000 L CNN
+F 2 "Sonrise:LGA-10_2x2mm_P0.5mm" H 1650 2900 50  0001 C CNN
+F 3 "https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bmp388-ds001.pdf" H 1650 3600 50  0001 C CNN
+F 4 "BMP388" H 1650 3600 50  0001 C CNN "Part#"
+	1    1650 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 610269F5
+P 2450 3600
+AR Path="/610269F5" Ref="C?"  Part="1" 
+AR Path="/60FE74E7/610269F5" Ref="C22"  Part="1" 
+F 0 "C22" H 2565 3646 50  0000 L CNN
+F 1 "0.1u" H 2565 3555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2488 3450 50  0001 C CNN
+F 3 "~" H 2450 3600 50  0001 C CNN
+F 4 "CL21B104KBCNNNC‎" H 2450 3600 50  0001 C CNN "Part#"
+	1    2450 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 61026A08
+P 3050 2150
+AR Path="/61026A08" Ref="C?"  Part="1" 
+AR Path="/60FE74E7/61026A08" Ref="C21"  Part="1" 
+F 0 "C21" H 3165 2196 50  0000 L CNN
+F 1 "2.2n" H 3165 2105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3088 2000 50  0001 C CNN
+F 3 "~" H 3050 2150 50  0001 C CNN
+F 4 "CL21B222KBANNNC" H 3050 2150 50  0001 C CNN "Part#"
+	1    3050 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 61026A0F
+P 2650 2150
+AR Path="/61026A0F" Ref="C?"  Part="1" 
+AR Path="/60FE74E7/61026A0F" Ref="C20"  Part="1" 
+F 0 "C20" H 2765 2196 50  0000 L CNN
+F 1 "0.1u" H 2765 2105 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 2688 2000 50  0001 C CNN
+F 3 "~" H 2650 2150 50  0001 C CNN
+F 4 "CL21B104KBCNNNC‎" H 2650 2150 50  0001 C CNN "Part#"
+	1    2650 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 61026A26
+P 3500 1650
+AR Path="/61026A26" Ref="C?"  Part="1" 
+AR Path="/60FE74E7/61026A26" Ref="C19"  Part="1" 
+F 0 "C19" H 3615 1696 50  0000 L CNN
+F 1 "0.1u" H 3615 1605 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 3538 1500 50  0001 C CNN
+F 3 "~" H 3500 1650 50  0001 C CNN
+F 4 "CL21B104KBCNNNC‎" H 3500 1650 50  0001 C CNN "Part#"
+	1    3500 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Sensor_Motion:MPU-6000 U?
+U 1 1 61026A39
+P 1900 1650
+AR Path="/61026A39" Ref="U?"  Part="1" 
+AR Path="/60FE74E7/61026A39" Ref="U3"  Part="1" 
+F 0 "U3" H 1400 2200 50  0000 L BNN
+F 1 "MPU-6000" V 1900 1650 50  0000 C CNN
+F 2 "Sensor_Motion:InvenSense_QFN-24_4x4mm_P0.5mm" H 1900 850 50  0001 C CNN
+F 3 "https://store.invensense.com/datasheets/invensense/MPU-6050_DataSheet_V3%204.pdf" H 1900 1500 50  0001 C CNN
+F 4 "MPU-6000" H 1900 1650 50  0001 C CNN "Part#"
+	1    1900 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x16 J6
+U 1 1 61089BC3
+P 7600 1700
+F 0 "J6" H 7680 1692 50  0000 L CNN
+F 1 "Conn_01x16" H 7680 1601 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x16_P2.54mm_Vertical" H 7600 1700 50  0001 C CNN
+F 3 "~" H 7600 1700 50  0001 C CNN
+F 4 "61301611121" H 7600 1700 50  0001 C CNN "Part#"
+	1    7600 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Micro_SD_Card_Det J?
+U 1 1 60DD3D2A
+P 4500 5800
+AR Path="/60DD3D2A" Ref="J?"  Part="1" 
+AR Path="/60FE74E7/60DD3D2A" Ref="J10"  Part="1" 
+F 0 "J10" H 4450 6617 50  0000 C CNN
+F 1 "Micro_SD_Card_Det" H 4450 6526 50  0000 C CNN
+F 2 "Connector_Card:microSD_HC_Hirose_DM3BT-DSF-PEJS" H 6550 6500 50  0001 C CNN
+F 3 "https://www.hirose.com/product/download/?distributor=digikey&type=2d&lang=en&num=DM3BT-DSF-PEJS" H 4500 5900 50  0001 C CNN
+F 4 "DM3BT-DSF-PEJS" H 4500 5800 50  0001 C CNN "Part#"
+	1    4500 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x06 J?
+U 1 1 61026A51
+P 4150 3600
+AR Path="/61026A51" Ref="J?"  Part="1" 
+AR Path="/60FE74E7/61026A51" Ref="J9"  Part="1" 
+F 0 "J9" H 4068 3075 50  0000 C CNN
+F 1 "1.25mm" H 4068 3166 50  0000 C CNN
+F 2 "Sonrise:10114830-10106LF_P1.25mm_Horizontal" H 4150 3600 50  0001 C CNN
+F 3 "~" H 4150 3600 50  0001 C CNN
+F 4 "10114830-10106LF" H 4150 3600 50  0001 C CNN "Part#"
+	1    4150 3600
+	-1   0    0    1   
+$EndComp
 $Comp
 L Sonrise:Conn_03x08_Row_Letter_Last J5
 U 1 1 6088F56E
@@ -986,8 +988,165 @@ F 4 "PR20208VBNN:3" H 9450 1300 50  0001 C CNN "Part#"
 	1    9450 1300
 	1    0    0    -1  
 $EndComp
-Text Label 2650 1850 0    50   ~ 0
-CPOUT
-Text Label 2650 1950 0    50   ~ 0
-REGOUT
+$Comp
+L Device:R_US R?
+U 1 1 60DA05D0
+P 1400 5150
+F 0 "R?" H 1468 5196 50  0000 L CNN
+F 1 "10k" H 1468 5105 50  0000 L CNN
+F 2 "" V 1440 5140 50  0001 C CNN
+F 3 "~" H 1400 5150 50  0001 C CNN
+	1    1400 5150
+	1    0    0    -1  
+$EndComp
+Connection ~ 1400 6200
+Wire Wire Line
+	1400 6200 3600 6200
+Wire Wire Line
+	1400 5300 1400 6200
+$Comp
+L Device:R_US R?
+U 1 1 60DEA1D5
+P 1700 5150
+F 0 "R?" H 1768 5196 50  0000 L CNN
+F 1 "47k" H 1768 5105 50  0000 L CNN
+F 2 "" V 1740 5140 50  0001 C CNN
+F 3 "~" H 1700 5150 50  0001 C CNN
+	1    1700 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_US R?
+U 1 1 60DEA577
+P 2000 5150
+F 0 "R?" H 2068 5196 50  0000 L CNN
+F 1 "47k" H 2068 5105 50  0000 L CNN
+F 2 "" V 2040 5140 50  0001 C CNN
+F 3 "~" H 2000 5150 50  0001 C CNN
+	1    2000 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1700 5300 1700 6100
+Connection ~ 1700 6100
+Wire Wire Line
+	1700 6100 3600 6100
+Wire Wire Line
+	2000 5300 2000 6000
+Connection ~ 2000 6000
+Wire Wire Line
+	2000 6000 3600 6000
+$Comp
+L Device:R_US R?
+U 1 1 60DF6257
+P 2300 5150
+F 0 "R?" H 2368 5196 50  0000 L CNN
+F 1 "47k" H 2368 5105 50  0000 L CNN
+F 2 "" V 2340 5140 50  0001 C CNN
+F 3 "~" H 2300 5150 50  0001 C CNN
+	1    2300 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2300 5300 2300 5800
+Connection ~ 2300 5800
+Wire Wire Line
+	2300 5800 3600 5800
+$Comp
+L Device:R_US R?
+U 1 1 60E0A897
+P 2600 5150
+F 0 "R?" H 2668 5196 50  0000 L CNN
+F 1 "47k" H 2668 5105 50  0000 L CNN
+F 2 "" V 2640 5140 50  0001 C CNN
+F 3 "~" H 2600 5150 50  0001 C CNN
+	1    2600 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2600 5300 2600 5600
+Connection ~ 2600 5600
+Wire Wire Line
+	2600 5600 3600 5600
+$Comp
+L Device:R_US R?
+U 1 1 60E10D95
+P 2900 5150
+F 0 "R?" H 2968 5196 50  0000 L CNN
+F 1 "47k" H 2968 5105 50  0000 L CNN
+F 2 "" V 2940 5140 50  0001 C CNN
+F 3 "~" H 2900 5150 50  0001 C CNN
+	1    2900 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 5300 2900 5500
+Connection ~ 2900 5500
+Wire Wire Line
+	2900 5500 3600 5500
+$Comp
+L Device:R_US R?
+U 1 1 60E174D2
+P 3200 5150
+F 0 "R?" H 3268 5196 50  0000 L CNN
+F 1 "47k" H 3268 5105 50  0000 L CNN
+F 2 "" V 3240 5140 50  0001 C CNN
+F 3 "~" H 3200 5150 50  0001 C CNN
+	1    3200 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3200 5300 3200 5400
+Connection ~ 3200 5400
+Wire Wire Line
+	3200 5400 3600 5400
+$Comp
+L power:+3.3V #PWR?
+U 1 1 60E27069
+P 1400 4900
+AR Path="/60E27069" Ref="#PWR?"  Part="1" 
+AR Path="/60FE74E7/60E27069" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1400 4750 50  0001 C CNN
+F 1 "+3.3V" H 1415 5073 50  0000 C CNN
+F 2 "" H 1400 4900 50  0001 C CNN
+F 3 "" H 1400 4900 50  0001 C CNN
+	1    1400 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2300 4950 2600 4950
+Wire Wire Line
+	3200 4950 3200 5000
+Wire Wire Line
+	2900 5000 2900 4950
+Connection ~ 2900 4950
+Wire Wire Line
+	2900 4950 3200 4950
+Wire Wire Line
+	2600 5000 2600 4950
+Connection ~ 2600 4950
+Wire Wire Line
+	2600 4950 2900 4950
+Wire Wire Line
+	2300 4950 2300 5000
+Connection ~ 2300 4950
+Wire Wire Line
+	1400 4900 1400 4950
+Wire Wire Line
+	1400 4950 1700 4950
+Connection ~ 1400 4950
+Wire Wire Line
+	1400 4950 1400 5000
+Wire Wire Line
+	2000 5000 2000 4950
+Connection ~ 2000 4950
+Wire Wire Line
+	2000 4950 2300 4950
+Wire Wire Line
+	1700 5000 1700 4950
+Connection ~ 1700 4950
+Wire Wire Line
+	1700 4950 2000 4950
+Wire Wire Line
+	3550 4900 3550 5700
 $EndSCHEMATC

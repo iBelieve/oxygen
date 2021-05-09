@@ -1541,208 +1541,8 @@ Wire Wire Line
 	3300 4450 3200 4450
 Wire Wire Line
 	3200 4550 3300 4550
-$Comp
-L power:GND #PWR0101
-U 1 1 60858319
-P 1450 6350
-F 0 "#PWR0101" H 1450 6100 50  0001 C CNN
-F 1 "GND" H 1455 6177 50  0000 C CNN
-F 2 "" H 1450 6350 50  0001 C CNN
-F 3 "" H 1450 6350 50  0001 C CNN
-	1    1450 6350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1450 6350 1450 6050
-Wire Wire Line
-	1450 3050 1500 3050
-Wire Wire Line
-	1500 3150 1450 3150
-Connection ~ 1450 3150
-Wire Wire Line
-	1450 3150 1450 3050
-Wire Wire Line
-	1500 3450 1450 3450
-Connection ~ 1450 3450
-Wire Wire Line
-	1450 3450 1450 3150
-Wire Wire Line
-	1500 3550 1450 3550
-Connection ~ 1450 3550
-Wire Wire Line
-	1450 3550 1450 3450
-Wire Wire Line
-	1500 3650 1450 3650
-Connection ~ 1450 3650
-Wire Wire Line
-	1450 3650 1450 3550
-Wire Wire Line
-	1500 3750 1450 3750
-Connection ~ 1450 3750
-Wire Wire Line
-	1450 3750 1450 3650
-Wire Wire Line
-	1500 3850 1450 3850
-Connection ~ 1450 3850
-Wire Wire Line
-	1450 3850 1450 3750
-Wire Wire Line
-	1500 4050 1450 4050
-Connection ~ 1450 4050
-Wire Wire Line
-	1450 4050 1450 3850
-Wire Wire Line
-	1500 4250 1450 4250
-Connection ~ 1450 4250
-Wire Wire Line
-	1450 4250 1450 4050
-Wire Wire Line
-	1500 6050 1450 6050
-Connection ~ 1450 6050
-Wire Wire Line
-	1450 6050 1450 5950
-Wire Wire Line
-	1500 5950 1450 5950
-Connection ~ 1450 5950
-Wire Wire Line
-	1450 5950 1450 5850
-Wire Wire Line
-	1500 5850 1450 5850
-Connection ~ 1450 5850
-Wire Wire Line
-	1450 5850 1450 5750
-Wire Wire Line
-	1500 5750 1450 5750
-Connection ~ 1450 5750
-Wire Wire Line
-	1450 5750 1450 5450
-Wire Wire Line
-	1500 5450 1450 5450
-Connection ~ 1450 5450
-Wire Wire Line
-	1450 5450 1450 4550
-Wire Wire Line
-	1500 4550 1450 4550
-Connection ~ 1450 4550
-Wire Wire Line
-	1450 4550 1450 4250
-$Comp
-L power:GND #PWR0102
-U 1 1 609359FA
-P 3250 6350
-F 0 "#PWR0102" H 3250 6100 50  0001 C CNN
-F 1 "GND" H 3255 6177 50  0000 C CNN
-F 2 "" H 3250 6350 50  0001 C CNN
-F 3 "" H 3250 6350 50  0001 C CNN
-	1    3250 6350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3250 1350 3200 1350
-Wire Wire Line
-	3200 1450 3250 1450
-Connection ~ 3250 1450
-Wire Wire Line
-	3250 1450 3250 1350
-Wire Wire Line
-	3200 1650 3250 1650
-Connection ~ 3250 1650
-Wire Wire Line
-	3250 1650 3250 1450
-Wire Wire Line
-	3200 1750 3250 1750
-Connection ~ 3250 1750
-Wire Wire Line
-	3250 1750 3250 1650
-Wire Wire Line
-	3200 2150 3250 2150
-Connection ~ 3250 2150
-Wire Wire Line
-	3250 2150 3250 1750
-Wire Wire Line
-	3200 2350 3250 2350
-Connection ~ 3250 2350
-Wire Wire Line
-	3250 2350 3250 2150
-Wire Wire Line
-	3200 2850 3250 2850
-Connection ~ 3250 2850
-Wire Wire Line
-	3250 2850 3250 2350
-Wire Wire Line
-	3200 3250 3250 3250
-Connection ~ 3250 3250
-Wire Wire Line
-	3250 3250 3250 2850
-Wire Wire Line
-	3200 3350 3250 3350
-Connection ~ 3250 3350
-Wire Wire Line
-	3250 3350 3250 3250
-Wire Wire Line
-	3200 3450 3250 3450
-Connection ~ 3250 3450
-Wire Wire Line
-	3250 3450 3250 3350
 Wire Wire Line
 	3200 3850 3300 3850
-Wire Wire Line
-	3250 6350 3250 6250
-Wire Wire Line
-	3200 3550 3250 3550
-Connection ~ 3250 3550
-Wire Wire Line
-	3250 3550 3250 3450
-Wire Wire Line
-	3200 4750 3250 4750
-Connection ~ 3250 4750
-Wire Wire Line
-	3250 4750 3250 3550
-Wire Wire Line
-	3250 4850 3200 4850
-Connection ~ 3250 4850
-Wire Wire Line
-	3250 4850 3250 4750
-Wire Wire Line
-	3200 4950 3250 4950
-Connection ~ 3250 4950
-Wire Wire Line
-	3250 4950 3250 4850
-Wire Wire Line
-	3250 5050 3200 5050
-Connection ~ 3250 5050
-Wire Wire Line
-	3250 5050 3250 4950
-Wire Wire Line
-	3250 5150 3200 5150
-Connection ~ 3250 5150
-Wire Wire Line
-	3250 5150 3250 5050
-Wire Wire Line
-	3250 5250 3200 5250
-Connection ~ 3250 5250
-Wire Wire Line
-	3250 5250 3250 5150
-Wire Wire Line
-	3250 5350 3200 5350
-Connection ~ 3250 5350
-Wire Wire Line
-	3250 5350 3250 5250
-Wire Wire Line
-	3200 6050 3250 6050
-Connection ~ 3250 6050
-Wire Wire Line
-	3250 6050 3250 5350
-Wire Wire Line
-	3250 6050 3250 6150
-Wire Wire Line
-	3250 6150 3200 6150
-Connection ~ 3250 6150
-Wire Wire Line
-	3200 6250 3250 6250
-Connection ~ 3250 6250
-Wire Wire Line
-	3250 6250 3250 6150
 $Comp
 L Regulator_Linear:XC6220B331MR U2
 U 1 1 609751BB
@@ -1763,4 +1563,39 @@ Wire Notes Line
 	4250 3400 7000 3400
 Wire Notes Line
 	7000 3400 7000 4550
+NoConn ~ 3200 1350
+NoConn ~ 3200 1450
+NoConn ~ 3200 1650
+NoConn ~ 3200 1750
+NoConn ~ 3200 6250
+NoConn ~ 3200 6150
+NoConn ~ 3200 6050
+NoConn ~ 3200 5350
+NoConn ~ 3200 5250
+NoConn ~ 3200 5150
+NoConn ~ 3200 5050
+NoConn ~ 3200 4950
+NoConn ~ 3200 4850
+NoConn ~ 3200 4750
+NoConn ~ 1500 6050
+NoConn ~ 1500 5950
+NoConn ~ 1500 5850
+NoConn ~ 1500 5750
+NoConn ~ 1500 5450
+NoConn ~ 1500 4550
+NoConn ~ 1500 4250
+NoConn ~ 1500 3850
+NoConn ~ 1500 3750
+NoConn ~ 1500 3650
+NoConn ~ 1500 3550
+NoConn ~ 1500 3450
+NoConn ~ 1500 3150
+NoConn ~ 1500 3050
+NoConn ~ 3200 2150
+NoConn ~ 3200 2350
+NoConn ~ 3200 2850
+NoConn ~ 3200 3250
+NoConn ~ 3200 3350
+NoConn ~ 3200 3450
+NoConn ~ 3200 3550
 $EndSCHEMATC
