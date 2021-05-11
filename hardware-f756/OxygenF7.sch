@@ -393,18 +393,18 @@ Text GLabel 3300 4350 2    50   Output ~ 0
 MPU_CS
 Text GLabel 3300 4250 2    50   Input ~ 0
 MPU_INT
-Text GLabel 1400 6250 0    50   Output ~ 0
+Text GLabel 3300 2350 2    50   Output ~ 0
 ULTRA_TRIG
-Text GLabel 1400 6150 0    50   Input ~ 0
+Text GLabel 3300 2150 2    50   Input ~ 0
 ULTRA_ECHO
-Text GLabel 1400 5350 0    50   BiDi ~ 0
+Text GLabel 3300 3350 2    50   BiDi ~ 0
 GPIO_1
-Text GLabel 1400 5250 0    50   BiDi ~ 0
+Text GLabel 1400 5450 0    50   BiDi ~ 0
 GPIO_2
-Text GLabel 1400 5150 0    50   BiDi ~ 0
-GPIO_3
-Text GLabel 1400 5050 0    50   BiDi ~ 0
+Text GLabel 1400 5250 0    50   BiDi ~ 0
 GPIO_4
+Text GLabel 1400 5350 0    50   BiDi ~ 0
+GPIO_3
 Text GLabel 3300 5450 2    50   Input ~ 0
 SDMMC1_DETECT
 Wire Wire Line
@@ -706,7 +706,7 @@ F 0 "D4" V 5439 5132 50  0000 R CNN
 F 1 "BLUE" V 5348 5132 50  0000 R CNN
 F 2 "LED_SMD:LED_0805_2012Metric" H 5400 5250 50  0001 C CNN
 F 3 "~" H 5400 5250 50  0001 C CNN
-F 4 "150080RS75000" H 5400 5250 50  0001 C CNN "Part#"
+F 4 "150080BS75000" H 5400 5250 50  0001 C CNN "Part#"
 	1    5400 5250
 	0    -1   -1   0   
 $EndComp
@@ -718,7 +718,7 @@ F 0 "D3" V 4989 5132 50  0000 R CNN
 F 1 "RED" V 4898 5132 50  0000 R CNN
 F 2 "LED_SMD:LED_0805_2012Metric" H 4950 5250 50  0001 C CNN
 F 3 "~" H 4950 5250 50  0001 C CNN
-F 4 "150080BS75000" H 4950 5250 50  0001 C CNN "Part#"
+F 4 "150080RS75000" H 4950 5250 50  0001 C CNN "Part#"
 	1    4950 5250
 	0    -1   -1   0   
 $EndComp
@@ -909,7 +909,7 @@ Wire Wire Line
 	4850 3500 4700 3500
 Wire Wire Line
 	4850 4100 4700 4100
-Text GLabel 4700 4100 0    50   Input ~ 0
+Text GLabel 4700 3500 0    50   Input ~ 0
 +5V_BEC
 $Comp
 L power:+5V #PWR018
@@ -1485,7 +1485,7 @@ Text GLabel 3300 1550 2    50   BiDi ~ 0
 USART2_TX
 Wire Wire Line
 	3300 1550 3200 1550
-Text GLabel 4700 3500 0    50   Input ~ 0
+Text GLabel 4700 4100 0    50   Input ~ 0
 VBUS
 Wire Notes Line
 	9150 2900 10000 2900
@@ -1506,19 +1506,19 @@ F 4 "STM32F756VGT6" H 2400 3750 50  0001 C CNN "Part#"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1500 5050 1400 5050
+	1500 5350 1400 5350
 Wire Wire Line
-	1400 5150 1500 5150
+	3300 3350 3200 3350
 Wire Wire Line
-	1500 5250 1400 5250
+	1500 5450 1400 5450
 Wire Wire Line
-	1400 5350 1500 5350
+	1400 5250 1500 5250
 Wire Wire Line
 	3300 5450 3200 5450
 Wire Wire Line
-	1400 6150 1500 6150
+	3300 2150 3200 2150
 Wire Wire Line
-	1400 6250 1500 6250
+	3300 2350 3200 2350
 Wire Wire Line
 	3300 4250 3200 4250
 Wire Wire Line
@@ -1562,21 +1562,14 @@ NoConn ~ 3200 5050
 NoConn ~ 3200 4950
 NoConn ~ 3200 4850
 NoConn ~ 3200 4750
-NoConn ~ 1500 6050
 NoConn ~ 1500 5750
-NoConn ~ 1500 5450
 NoConn ~ 1500 4550
 NoConn ~ 1500 4250
 NoConn ~ 1500 3850
 NoConn ~ 1500 3750
 NoConn ~ 1500 3650
 NoConn ~ 1500 3550
-NoConn ~ 3200 2150
-NoConn ~ 3200 2350
 NoConn ~ 3200 2850
-NoConn ~ 3200 3350
-NoConn ~ 3200 3450
-NoConn ~ 3200 3550
 Text GLabel 1400 5850 0    50   BiDi ~ 0
 QUADSPI_IO0
 Wire Wire Line
@@ -1589,10 +1582,10 @@ Text GLabel 1350 3250 0    50   BiDi ~ 0
 QUADSPI_IO2
 Wire Wire Line
 	1350 3250 1500 3250
-Text GLabel 3300 1450 2    50   BiDi ~ 0
+Text GLabel 1400 6050 0    50   BiDi ~ 0
 QUADSPI_IO3
 Wire Wire Line
-	3300 1450 3200 1450
+	1400 6050 1500 6050
 Text GLabel 3300 3250 2    50   Output ~ 0
 QUADSPI_SCLK
 Wire Wire Line
@@ -1654,4 +1647,7 @@ Wire Wire Line
 	1350 3050 1500 3050
 NoConn ~ 3200 3750
 NoConn ~ 1500 4050
+NoConn ~ 1500 6150
+NoConn ~ 1500 6250
+NoConn ~ 3200 1450
 $EndSCHEMATC
