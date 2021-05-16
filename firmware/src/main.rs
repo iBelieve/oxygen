@@ -1,16 +1,280 @@
-#![deny(unsafe_code)]
+// #![deny(unsafe_code)]
 #![no_main]
 #![no_std]
 
 extern crate panic_rtt_target;
 
-use cortex_m_rt::entry;
-use rtt_target::{rtt_init_print, rprintln};
+// mod boards;
+// mod device;
+// mod mpu6000;
+mod clock;
+mod drivers;
 
-#[entry]
-fn main() -> ! {
-    rtt_init_print!();
-    rprintln!("Hello, world!");
+use embedded_hal::blocking::delay::DelayMs;
+// use mpu6000::{
+//     bus::{Bus, SpiBus},
+//     registers::{AccelerometerSensitive, GyroSensitive},
+//     MPU6000,
+// };
+use rtic::app;
+use rtt_target::{rprintln, rtt_init_print};
+use stm32f7xx_hal::{
+    delay::Delay,
+    gpio::{self, Edge, ExtiPin},
+    i2c::{self, I2c},
+    pac,
+    prelude::*,
+    pwm,
+    rcc::{HSEClock, HSEClockMode},
+    spi::{self, Spi},
+    time::KiloHertz,
+    timer::Timer
+};
+use crate::clock::SysClock;
+use stm32f7xx_hal::gpio::gpioa::{PA10, PA8};
+use stm32f7xx_hal::gpio::{Output, PushPull, Input, Floating};
+use stm32f7xx_hal::pwm::{PwmChannels, C1, C2, C3, C4};
+use stm32f7xx_hal::pac::{TIM3, TIM1, TIM2, TIM4, EXTI};
+use stm32f7xx_hal::timer::Event;
+use embedded_time::Clock;
 
-    panic!("Yep, it crashes.");
+type I2C1 = I2c<
+    pac::I2C1,
+    gpio::gpiob::PB8<gpio::Alternate<gpio::AF4>>,
+    gpio::gpiob::PB9<gpio::Alternate<gpio::AF4>>,
+>;
+
+type SPI1 = Spi<
+    pac::SPI1,
+    (
+        gpio::gpioa::PA5<gpio::Alternate<gpio::AF5>>,
+        gpio::gpioa::PA6<gpio::Alternate<gpio::AF5>>,
+        gpio::gpioa::PA7<gpio::Alternate<gpio::AF5>>,
+    ),
+    spi::Enabled<u8>,
+>;
+
+type TriggerPin = PA10<Output<PushPull>>;
+type EchoPin = PA8<Input<Floating>>;
+type HcSr04 = crate::drivers::HcSr04<TriggerPin>;
+
+const SERVO_PWM_FREQUENCY: KiloHertz = KiloHertz(50);
+
+pub struct Servos {
+    ch1: PwmChannels<TIM3, C3>,
+    ch2: PwmChannels<TIM3, C4>,
+    ch3: PwmChannels<TIM1, C1>,
+    ch4: PwmChannels<TIM1, C2>,
+    ch5: PwmChannels<TIM1, C3>,
+    ch6: PwmChannels<TIM1, C4>,
+    ch7: PwmChannels<TIM2, C3>,
+    ch8: PwmChannels<TIM2, C4>,
 }
+
+#[app(device = stm32f7xx_hal::pac, peripherals = true)]
+const APP: () = {
+    struct Resources {
+        delay: Delay,
+        servos: Servos,
+        clock: SysClock,
+        hcsr04_timer: Timer<TIM4>,
+        hcsr04: HcSr04,
+        echo_pin: EchoPin
+    }
+
+    #[init]
+    fn init(ctx: init::Context) -> init::LateResources {
+        rtt_init_print!();
+        rprintln!("Welcome to Oxygen F7");
+
+        let core: cortex_m::Peripherals = ctx.core;
+        let mut device: stm32f7xx_hal::pac::Peripherals = ctx.device;
+
+        let gpioa = device.GPIOA.split();
+        let gpiob = device.GPIOB.split();
+        let gpioe = device.GPIOE.split();
+
+        // LED pins
+        let mut led1 = gpioe.pe2.into_push_pull_output();
+        let mut led2 = gpioe.pe3.into_push_pull_output();
+
+        // Set LED pins to high to indicate flight controller is working
+        led1.set_high().unwrap();
+        led2.set_high().unwrap();
+
+        // MPU Interrupt pin
+        let mut mpu_int = gpiob.pb12.into_floating_input();
+        mpu_int.make_interrupt_source(&mut device.SYSCFG, &mut device.RCC);
+        mpu_int.trigger_on_edge(&mut device.EXTI, Edge::Rising);
+        mpu_int.enable_interrupt(&mut device.EXTI);
+
+        // BMP Interrupt pin
+        let mut bmp_int = gpiob.pb14.into_floating_input();
+        bmp_int.make_interrupt_source(&mut device.SYSCFG, &mut device.RCC);
+        bmp_int.trigger_on_edge(&mut device.EXTI, Edge::Rising);
+        bmp_int.enable_interrupt(&mut device.EXTI);
+
+        // MPU and BMP chip select pins
+        let mut mpu_cs = gpiob.pb13.into_push_pull_output();
+        let mut bmp_cs = gpiob.pb15.into_push_pull_output();
+
+        // Set CS pins to high (disabled) initially
+        mpu_cs.set_high().unwrap();
+        bmp_cs.set_high().unwrap();
+
+        // Distance Sensor
+        let hcsr04 = HcSr04::new(gpioa.pa10.into_push_pull_output())
+            .expect("Unable to initialize HC SR-04 ultrasonic distance sensor");
+
+        let mut echo_pin = gpioa.pa8.into_floating_input();
+        echo_pin.make_interrupt_source(&mut device.SYSCFG, &mut device.RCC);
+        echo_pin.trigger_on_edge(&mut device.EXTI, Edge::RisingFalling);
+        echo_pin.enable_interrupt(&mut device.EXTI);
+
+        // Constrain clocking registers
+        let mut rcc = device.RCC.constrain();
+
+        // Configure clock and freeze it
+        let clocks = rcc
+            .cfgr
+            .hse(HSEClock::new(8.mhz(), HSEClockMode::Oscillator))
+            .sysclk(216.mhz())
+            .freeze();
+
+        // Distance sensor trigger timer
+        let mut hcsr04_timer = Timer::tim4(device.TIM4, 10.hz(), clocks, &mut rcc.apb1);
+        hcsr04_timer.listen(Event::TimeOut);
+
+        // Monotonic clock
+        let clock = SysClock::new(device.TIM5, clocks);
+
+        // Get delay provider
+        let mut delay = Delay::new(core.SYST, clocks);
+
+        // Servo PWM channels
+        let (servo1, servo2) = pwm::tim3(
+            device.TIM3,
+            (
+                gpiob.pb0.into_alternate_af2(),
+                gpiob.pb1.into_alternate_af2(),
+            ),
+            clocks,
+            SERVO_PWM_FREQUENCY,
+        );
+        let (servo3, servo4, servo5, servo6) = pwm::tim1(
+            device.TIM1,
+            (
+                gpioe.pe9.into_alternate_af1(),
+                gpioe.pe11.into_alternate_af1(),
+                gpioe.pe13.into_alternate_af1(),
+                gpioe.pe14.into_alternate_af1(),
+            ),
+            clocks,
+            SERVO_PWM_FREQUENCY,
+        );
+        let (servo7, servo8) = pwm::tim2(
+            device.TIM2,
+            (
+                gpiob.pb10.into_alternate_af1(),
+                gpiob.pb11.into_alternate_af1(),
+            ),
+            clocks,
+            SERVO_PWM_FREQUENCY,
+        );
+
+        // I2C1
+        let scl = gpiob.pb8.into_alternate_af4();
+        let sda = gpiob.pb9.into_alternate_af4();
+
+        let i2c1 = I2c::i2c1(
+            device.I2C1,
+            (scl, sda),
+            i2c::Mode::standard(400.khz()),
+            clocks,
+            &mut rcc.apb1,
+        );
+
+        let i2c1_shared: &'static _ = shared_bus::new_atomic_check!(I2C1 = i2c1).unwrap();
+
+        // SPI1
+        let sck = gpioa.pa5.into_alternate_af5();
+        let miso = gpioa.pa6.into_alternate_af5();
+        let mosi = gpioa.pa7.into_alternate_af5();
+
+        let spi1 = Spi::new(device.SPI1, (sck, miso, mosi)).enable::<u8>(
+            &mut rcc.apb2,             // 108 MHz
+            spi::ClockDivider::DIV128, // 108/128 = 0.84Mhz (must be 1MHz or less)
+            spi::Mode {
+                polarity: spi::Polarity::IdleHigh,
+                phase: spi::Phase::CaptureOnSecondTransition,
+            },
+        );
+
+        let spi1_shared: &'static _ = shared_bus::new_atomic_check!(SPI1 = spi1).unwrap();
+
+        // let spi_bus = SpiBus::new(spi, mpu_ncs, delay);
+        // let mut mpu6000 = MPU6000::new(spi_bus);
+        // mpu6000.reset(&mut delay).unwrap();
+        // mpu6000.wake(&delay).unwrap();
+        // mpu6000
+        //     .set_accelerometer_sensitive(accelerometer_sensitive!(+/-16g, 2048/LSB))
+        //     .unwrap();
+        // mpu6000
+        //     .set_gyro_sensitive(gyro_sensitive!(+/-2000dps, 16.4LSB/dps))
+        //     .unwrap();
+
+        init::LateResources {
+            delay,
+            clock,
+            hcsr04_timer,
+            hcsr04,
+            echo_pin,
+            servos: Servos {
+                ch1: servo1,
+                ch2: servo2,
+                ch3: servo3,
+                ch4: servo4,
+                ch5: servo5,
+                ch6: servo6,
+                ch7: servo7,
+                ch8: servo8,
+            }
+        }
+    }
+
+    #[task(binds = TIM4, resources = [delay, hcsr04_timer, hcsr04])]
+    fn hcsr04_timer(ctx: hcsr04_timer::Context) {
+        let delay: &mut Delay = ctx.resources.delay;
+        let timer: &mut Timer<TIM4> = ctx.resources.hcsr04_timer;
+        let hcsr04: &mut HcSr04 = ctx.resources.hcsr04;
+
+        timer.clear_interrupt(Event::TimeOut);
+
+        hcsr04.trigger(delay)
+            .expect("Unable to trigger distance reading");
+    }
+
+    #[task(binds = EXTI9_5, resources = [clock, echo_pin, hcsr04])]
+    fn exti9_5(ctx: exti9_5::Context) {
+        let echo_pin: &mut EchoPin = ctx.resources.echo_pin;
+        let clock: &mut SysClock = ctx.resources.clock;
+        let hcsr04: &mut HcSr04 = ctx.resources.hcsr04;
+
+        let now = clock.try_now().expect("Unable to get current time from system clock");
+
+        if echo_pin.check_interrupt() {
+            echo_pin.clear_interrupt_pending_bit();
+
+            if echo_pin.is_high().unwrap() {
+                hcsr04.on_echo_start(now)
+                    .expect("Error handling HC-SR04 echo start");
+            } else {
+                let dist = hcsr04.on_echo_end(now)
+                    .expect("Error handling HC-SR04 echo end");
+                rprintln!("Current distance: {}", dist);
+            }
+        } else {
+            rprintln!("Unexpected EXTI9_5 interrupt");
+        }
+    }
+};
