@@ -16,8 +16,16 @@ use embedded_hal::blocking::delay::DelayMs;
 //     registers::{AccelerometerSensitive, GyroSensitive},
 //     MPU6000,
 // };
+use crate::clock::SysClock;
+use crate::drivers::Servos;
+use embedded_time::Clock;
 use rtic::app;
 use rtt_target::{rprintln, rtt_init_print};
+use stm32f7xx_hal::gpio::gpioa::{PA10, PA8};
+use stm32f7xx_hal::gpio::{Floating, Input, Output, PushPull};
+use stm32f7xx_hal::pac::{EXTI, TIM1, TIM2, TIM3, TIM4};
+use stm32f7xx_hal::pwm::{PwmChannels, C1, C2, C3, C4};
+use stm32f7xx_hal::timer::Event;
 use stm32f7xx_hal::{
     delay::Delay,
     gpio::{self, Edge, ExtiPin},
@@ -28,15 +36,8 @@ use stm32f7xx_hal::{
     rcc::{HSEClock, HSEClockMode},
     spi::{self, Spi},
     time::KiloHertz,
-    timer::Timer
+    timer::Timer,
 };
-use crate::clock::SysClock;
-use stm32f7xx_hal::gpio::gpioa::{PA10, PA8};
-use stm32f7xx_hal::gpio::{Output, PushPull, Input, Floating};
-use stm32f7xx_hal::pwm::{PwmChannels, C1, C2, C3, C4};
-use stm32f7xx_hal::pac::{TIM3, TIM1, TIM2, TIM4, EXTI};
-use stm32f7xx_hal::timer::Event;
-use embedded_time::Clock;
 
 type I2C1 = I2c<
     pac::I2C1,
@@ -58,19 +59,6 @@ type TriggerPin = PA10<Output<PushPull>>;
 type EchoPin = PA8<Input<Floating>>;
 type HcSr04 = crate::drivers::HcSr04<TriggerPin>;
 
-const SERVO_PWM_FREQUENCY: KiloHertz = KiloHertz(50);
-
-pub struct Servos {
-    ch1: PwmChannels<TIM3, C3>,
-    ch2: PwmChannels<TIM3, C4>,
-    ch3: PwmChannels<TIM1, C1>,
-    ch4: PwmChannels<TIM1, C2>,
-    ch5: PwmChannels<TIM1, C3>,
-    ch6: PwmChannels<TIM1, C4>,
-    ch7: PwmChannels<TIM2, C3>,
-    ch8: PwmChannels<TIM2, C4>,
-}
-
 #[app(device = stm32f7xx_hal::pac, peripherals = true)]
 const APP: () = {
     struct Resources {
@@ -79,7 +67,7 @@ const APP: () = {
         clock: SysClock,
         hcsr04_timer: Timer<TIM4>,
         hcsr04: HcSr04,
-        echo_pin: EchoPin
+        echo_pin: EchoPin,
     }
 
     #[init]
@@ -151,35 +139,20 @@ const APP: () = {
         // Get delay provider
         let mut delay = Delay::new(core.SYST, clocks);
 
-        // Servo PWM channels
-        let (servo1, servo2) = pwm::tim3(
-            device.TIM3,
-            (
-                gpiob.pb0.into_alternate_af2(),
-                gpiob.pb1.into_alternate_af2(),
-            ),
+        // Servos!
+        let servos = Servos::new(
             clocks,
-            SERVO_PWM_FREQUENCY,
-        );
-        let (servo3, servo4, servo5, servo6) = pwm::tim1(
             device.TIM1,
-            (
-                gpioe.pe9.into_alternate_af1(),
-                gpioe.pe11.into_alternate_af1(),
-                gpioe.pe13.into_alternate_af1(),
-                gpioe.pe14.into_alternate_af1(),
-            ),
-            clocks,
-            SERVO_PWM_FREQUENCY,
-        );
-        let (servo7, servo8) = pwm::tim2(
             device.TIM2,
-            (
-                gpiob.pb10.into_alternate_af1(),
-                gpiob.pb11.into_alternate_af1(),
-            ),
-            clocks,
-            SERVO_PWM_FREQUENCY,
+            device.TIM3,
+            gpiob.pb0.into_alternate_af2(),
+            gpiob.pb1.into_alternate_af2(),
+            gpioe.pe9.into_alternate_af1(),
+            gpioe.pe11.into_alternate_af1(),
+            gpioe.pe13.into_alternate_af1(),
+            gpioe.pe14.into_alternate_af1(),
+            gpiob.pb10.into_alternate_af1(),
+            gpiob.pb11.into_alternate_af1(),
         );
 
         // I2C1
@@ -229,16 +202,7 @@ const APP: () = {
             hcsr04_timer,
             hcsr04,
             echo_pin,
-            servos: Servos {
-                ch1: servo1,
-                ch2: servo2,
-                ch3: servo3,
-                ch4: servo4,
-                ch5: servo5,
-                ch6: servo6,
-                ch7: servo7,
-                ch8: servo8,
-            }
+            servos,
         }
     }
 
@@ -250,7 +214,8 @@ const APP: () = {
 
         timer.clear_interrupt(Event::TimeOut);
 
-        hcsr04.trigger(delay)
+        hcsr04
+            .trigger(delay)
             .expect("Unable to trigger distance reading");
     }
 
@@ -260,18 +225,22 @@ const APP: () = {
         let clock: &mut SysClock = ctx.resources.clock;
         let hcsr04: &mut HcSr04 = ctx.resources.hcsr04;
 
-        let now = clock.try_now().expect("Unable to get current time from system clock");
+        let now = clock
+            .try_now()
+            .expect("Unable to get current time from system clock");
 
         if echo_pin.check_interrupt() {
             echo_pin.clear_interrupt_pending_bit();
 
             if echo_pin.is_high().unwrap() {
-                hcsr04.on_echo_start(now)
+                hcsr04
+                    .on_echo_start(now)
                     .expect("Error handling HC-SR04 echo start");
             } else {
-                let dist = hcsr04.on_echo_end(now)
+                let dist_mm = hcsr04
+                    .on_echo_end(now)
                     .expect("Error handling HC-SR04 echo end");
-                rprintln!("Current distance: {}", dist);
+                rprintln!("Current distance: {}mm", dist_mm);
             }
         } else {
             rprintln!("Unexpected EXTI9_5 interrupt");

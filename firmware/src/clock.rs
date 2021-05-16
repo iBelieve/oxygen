@@ -1,8 +1,12 @@
-use embedded_time::{clock::Error, Clock};
-use stm32f7xx_hal::{pac::{RCC, TIM5}, rcc::Clocks, bb};
-use embedded_time::fraction::Fraction;
-use stm32f7xx_hal::time::Hertz;
 use cast::{u16, u32};
+use embedded_time::fraction::Fraction;
+use embedded_time::{clock::Error, Clock};
+use stm32f7xx_hal::time::Hertz;
+use stm32f7xx_hal::{
+    bb,
+    pac::{RCC, TIM5},
+    rcc::Clocks,
+};
 
 pub type Instant = embedded_time::Instant<SysClock>;
 
@@ -33,7 +37,7 @@ impl SysClock {
         let ticks = clocks.pclk1().0 * pclk_mul / frequency;
 
         let psc = u16((ticks - 1) / (1 << 16)).unwrap();
-        tim.psc.write(|w| w.psc().bits(psc) );
+        tim.psc.write(|w| w.psc().bits(psc));
 
         let arr = u16(ticks / u32(psc + 1)).unwrap();
         tim.arr.write(|w| unsafe { w.bits(u32(arr)) });
@@ -43,12 +47,16 @@ impl SysClock {
         tim.egr.write(|w| w.ug().set_bit());
         tim.cr1.modify(|_, w| w.urs().clear_bit());
 
-        tim.cr1.write(|w|
-            w.cms().edge_aligned()
-                .dir().up()
-                .opm().disabled()
-                .cen().enabled()
-        );
+        tim.cr1.write(|w| {
+            w.cms()
+                .edge_aligned()
+                .dir()
+                .up()
+                .opm()
+                .disabled()
+                .cen()
+                .enabled()
+        });
 
         Self { tim }
     }
