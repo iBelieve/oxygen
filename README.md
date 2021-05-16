@@ -1,6 +1,6 @@
 # Oxygen F7 Flight Controller
 
-![3D render of PCB](./hardware-f756/OxygenF7.png)
+![3D render of PCB](./hardware/OxygenF7.png)
 
 ## Hardware
 
