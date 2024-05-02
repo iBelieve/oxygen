@@ -2,6 +2,10 @@
 
 ![3D render of PCB](./hardware/OxygenF7.png)
 
+![Front of PCB](./hardware/OxygenF7_front.jpeg)
+![Back of PCB](./hardware/OxygenF7_back.jpeg)
+![Populated PCB](./hardware/OxygenF7_populated.jpeg)
+
 ## Hardware
 
 - Designed for fixed-wing aircraft
